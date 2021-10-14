@@ -1,5 +1,5 @@
-import { Component, Prop, h } from '@stencil/core';
-import { format } from '../../utils/utils';
+import { Component, Prop, h, Method } from '@stencil/core';
+
 
 @Component({
   tag: 'my-component',
@@ -10,23 +10,65 @@ export class MyComponent {
   /**
    * The first name
    */
-  @Prop() first: string;
+  @Prop({ mutable: true }) count = 0;
 
-  /**
-   * The middle name
-   */
-  @Prop() middle: string;
+  @Method() async updateCount(value: number): Promise<void> {
+    if (value < 0) {
+      this.count = 0;
+    } else {
+      this.count = value;
+    }
+  }
 
-  /**
-   * The last name
-   */
-  @Prop() last: string;
+  handleSingleDecrement = () => {
+    if (this.count <= 1) {
+      this.count = 0;
+    } else {
+      this.count--;
+    }
+  }
 
-  private getText(): string {
-    return format(this.first, this.middle, this.last);
+  handleDoubleDecrement = () => {
+    if (this.count <= 2) {
+      this.count = 0;
+    } else {
+      this.count -= 2;
+    }
+  }
+
+  handleTripleDecrement = () => {
+    if (this.count <= 3) {
+      this.count = 0;
+    } else {
+      this.count -= 3;
+    }
+  }
+
+  handleSingleIncrement = () => {
+    this.count++;
+  }
+
+  handleDoubleIncrement = () => {
+    this.count += 2;
+  }
+
+  handleTripleIncrement = () => {
+    this.count += 3;
   }
 
   render() {
-    return <div>Hello, World! I'm {this.getText()}</div>;
+    return [
+      <div class="buttons">
+        <button onClick={this.handleSingleDecrement}>- 1</button>
+        <button onClick={this.handleDoubleDecrement}>- 2</button>
+        <button onClick={this.handleTripleDecrement}>- 3</button>
+      </div>,
+      <input value={this.count} />,
+      <div class="buttons">
+        <button onClick={this.handleSingleIncrement}>+ 1</button>
+        <button onClick={this.handleDoubleIncrement}>+ 2</button>
+        <button onClick={this.handleTripleIncrement}>+ 3</button>
+      </div>
+    ];
   }
 }

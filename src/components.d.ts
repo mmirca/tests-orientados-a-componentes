@@ -10,15 +10,8 @@ export namespace Components {
         /**
           * The first name
          */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
+        "count": number;
+        "updateCount": (value: number) => Promise<void>;
     }
 }
 declare global {
@@ -37,15 +30,7 @@ declare namespace LocalJSX {
         /**
           * The first name
          */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
+        "count"?: number;
     }
     interface IntrinsicElements {
         "my-component": MyComponent;
