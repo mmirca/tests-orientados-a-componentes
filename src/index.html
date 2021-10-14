@@ -9,6 +9,20 @@
     <script nomodule src="/build/testing-orientado-a-componentes.js"></script>
   </head>
   <body>
-    <my-component></my-component>
+    <div data-e2e="demo">
+      <my-component id="counter"></my-component>
+      <br>
+      <button id="update-count-button">
+        Set to 30
+      </button>
+      <script>
+        (function() {
+          const $counter = document.querySelector('#counter');
+          const $updateCountButton = document.querySelector('#update-count-button');
+
+          $updateCountButton.onclick = () => $counter.updateCount(30);
+        })();
+      </script>
+    </div>
   </body>
 </html>

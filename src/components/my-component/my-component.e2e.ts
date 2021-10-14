@@ -1,32 +1,16 @@
-import { newE2EPage } from '@stencil/core/testing';
+// import { newE2EPage } from '@stencil/core/testing';
+import { MyComponentPage } from './MyComponentPage';
 
 describe('my-component', () => {
-  it('renders', async () => {
-    const page = await newE2EPage();
+  it('should set "30" as input value when the update button is clicked', async () => {
+    const page = new MyComponentPage();
+    await page.navigateTo();
 
-    await page.setContent('<my-component></my-component>');
-    const element = await page.find('my-component');
-    expect(element).toHaveClass('hydrated');
-  });
+    const $updateCounterButton = await page.updateCounterButton;
+    await $updateCounterButton.click();
 
-  it('renders changes to the name data', async () => {
-    const page = await newE2EPage();
+    const inputValue = await page.inputValue;
 
-    await page.setContent('<my-component></my-component>');
-    const component = await page.find('my-component');
-    const element = await page.find('my-component >>> div');
-    expect(element.textContent).toEqual(`Hello, World! I'm `);
-
-    component.setProperty('first', 'James');
-    await page.waitForChanges();
-    expect(element.textContent).toEqual(`Hello, World! I'm James`);
-
-    component.setProperty('last', 'Quincy');
-    await page.waitForChanges();
-    expect(element.textContent).toEqual(`Hello, World! I'm James Quincy`);
-
-    component.setProperty('middle', 'Earl');
-    await page.waitForChanges();
-    expect(element.textContent).toEqual(`Hello, World! I'm James Earl Quincy`);
+    expect(inputValue).toBe('30');
   });
 });
