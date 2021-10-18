@@ -10,7 +10,7 @@ export class MyComponent {
   /**
    * The first name
    */
-  @Prop({ mutable: true }) count = 0;
+  @Prop({ mutable: true, reflect: true }) count = 0;
 
   @Method() async updateCount(value: number): Promise<void> {
     if (value < 0) {

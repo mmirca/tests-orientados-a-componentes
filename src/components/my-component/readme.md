@@ -7,11 +7,22 @@
 
 ## Properties
 
-| Property | Attribute | Description     | Type     | Default     |
-| -------- | --------- | --------------- | -------- | ----------- |
-| `first`  | `first`   | The first name  | `string` | `undefined` |
-| `last`   | `last`    | The last name   | `string` | `undefined` |
-| `middle` | `middle`  | The middle name | `string` | `undefined` |
+| Property | Attribute | Description    | Type     | Default |
+| -------- | --------- | -------------- | -------- | ------- |
+| `count`  | `count`   | The first name | `number` | `0`     |
+
+
+## Methods
+
+### `updateCount(value: number) => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
 
 
 ----------------------------------------------
