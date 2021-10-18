@@ -11,7 +11,7 @@ export class MyComponentPage {
     return this.page.then(page => {
       return page.$eval('#counter', counter => {
         const $input = counter.shadowRoot.querySelector('input');
-        return $input.value;
+        return Promise.resolve($input.value);
       });
     });
   }
