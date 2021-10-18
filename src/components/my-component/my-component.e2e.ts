@@ -9,8 +9,8 @@ describe('my-component', () => {
     const $updateCounterButton = await page.updateCounterButton;
     await $updateCounterButton.click();
 
-    const $myComponent = await page.myComponent;
+    const inputValue = await page.inputValue;
 
-    expect($myComponent.getAttribute('count')).toBe('30');
+    expect(inputValue).toBe('30');
   });
 });

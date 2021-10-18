@@ -7,8 +7,10 @@ export class MyComponentPage {
     return this.getElement('#update-count-button');
   }
 
-  get myComponent(): Promise<E2EElement> {
-    return this.getElement('my-component');
+  get inputValue(): Promise<any> {
+    return this.page
+      .then(page => page.find('#counter >>> input'))
+      .then(el => el.getProperty('value'));
   }
 
   async navigateTo(): Promise<E2EPage> {
