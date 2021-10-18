@@ -7,13 +7,8 @@ export class MyComponentPage {
     return this.getElement('#update-count-button');
   }
 
-  get inputValue(): Promise<string> {
-    return this.page.then(page => {
-      return page.$eval('#counter', counter => {
-        const $input = counter.shadowRoot.querySelector('input');
-        return Promise.resolve($input.value);
-      });
-    });
+  get myComponent(): Promise<E2EElement> {
+    return this.getElement('my-component');
   }
 
   async navigateTo(): Promise<E2EPage> {
