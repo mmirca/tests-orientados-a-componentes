@@ -13,6 +13,9 @@ export namespace Components {
         "count": number;
         "updateCount": (value: number) => Promise<void>;
     }
+    interface MyComponentButton {
+        "incrementValues": number[];
+    }
 }
 declare global {
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
@@ -21,8 +24,15 @@ declare global {
         prototype: HTMLMyComponentElement;
         new (): HTMLMyComponentElement;
     };
+    interface HTMLMyComponentButtonElement extends Components.MyComponentButton, HTMLStencilElement {
+    }
+    var HTMLMyComponentButtonElement: {
+        prototype: HTMLMyComponentButtonElement;
+        new (): HTMLMyComponentButtonElement;
+    };
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
+        "my-component-button": HTMLMyComponentButtonElement;
     }
 }
 declare namespace LocalJSX {
@@ -32,8 +42,13 @@ declare namespace LocalJSX {
          */
         "count"?: number;
     }
+    interface MyComponentButton {
+        "incrementValues"?: number[];
+        "onIncrement"?: (event: CustomEvent<number>) => void;
+    }
     interface IntrinsicElements {
         "my-component": MyComponent;
+        "my-component-button": MyComponentButton;
     }
 }
 export { LocalJSX as JSX };
@@ -41,6 +56,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "my-component-button": LocalJSX.MyComponentButton & JSXBase.HTMLAttributes<HTMLMyComponentButtonElement>;
         }
     }
 }

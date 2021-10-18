@@ -1,0 +1,12 @@
+button {
+  display: block;
+  outline: none;
+  background-color: royalblue;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: darkblue;
+}

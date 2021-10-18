@@ -13,62 +13,24 @@ export class MyComponent {
   @Prop({ mutable: true }) count = 0;
 
   @Method() async updateCount(value: number): Promise<void> {
-    if (value < 0) {
-      this.count = 0;
-    } else {
-      this.count = value;
-    }
+    this.count = Math.max(0, value);
   }
 
-  handleSingleDecrement = () => {
-    if (this.count <= 1) {
-      this.count = 0;
-    } else {
-      this.count--;
-    }
-  }
-
-  handleDoubleDecrement = () => {
-    if (this.count <= 2) {
-      this.count = 0;
-    } else {
-      this.count -= 2;
-    }
-  }
-
-  handleTripleDecrement = () => {
-    if (this.count <= 3) {
-      this.count = 0;
-    } else {
-      this.count -= 3;
-    }
-  }
-
-  handleSingleIncrement = () => {
-    this.count++;
-  }
-
-  handleDoubleIncrement = () => {
-    this.count += 2;
-  }
-
-  handleTripleIncrement = () => {
-    this.count += 3;
+  handleIncrement = (event: CustomEvent<number>) => {
+    this.count = Math.max(0, this.count + event.detail);
   }
 
   render() {
     return [
-      <div class="buttons">
-        <button onClick={this.handleSingleDecrement}>- 1</button>
-        <button onClick={this.handleDoubleDecrement}>- 2</button>
-        <button onClick={this.handleTripleDecrement}>- 3</button>
-      </div>,
+      <my-component-button
+        incrementValues={[-1, -2, -3]}
+        onIncrement={this.handleIncrement}
+      ></my-component-button>,
       <input value={this.count} />,
-      <div class="buttons">
-        <button onClick={this.handleSingleIncrement}>+ 1</button>
-        <button onClick={this.handleDoubleIncrement}>+ 2</button>
-        <button onClick={this.handleTripleIncrement}>+ 3</button>
-      </div>
+      <my-component-button
+        incrementValues={[1, 2, 3]}
+        onIncrement={this.handleIncrement}
+      ></my-component-button>
     ];
   }
 }
